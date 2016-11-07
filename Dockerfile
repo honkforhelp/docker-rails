@@ -15,6 +15,7 @@ RUN apt-get -yy update && apt-get -yy install curl \
     file \
     libmagickwand-dev \
     libcurl4-openssl-dev \
+    libpq-dev \
 && rm -rf /var/lib/apt/lists/*
 
 # Copy our nginx config to the right place
