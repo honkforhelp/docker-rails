@@ -17,6 +17,12 @@ RUN apt-get -yy update && apt-get -yy install curl \
     libcurl4-openssl-dev \
 && rm -rf /var/lib/apt/lists/*
 
+# Copy our nginx config to the right place
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Port corresponding to the port we send traffic to in our nginx.conf
+ENV PORT=5000
+
 # Pre-Install the Latest Bundler
 RUN gem install bundler
 
