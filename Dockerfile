@@ -1,6 +1,8 @@
 # Use the Latest LTS Ubuntu Version
 FROM ubuntu:16.04
 
+MAINTAINER HONK Technologies, Inc.
+
 # Curl Nonsense to get NodeJS 6.X (LTS) Version
 RUN apt-get -yy update && apt-get -yy install curl \
 && (curl -sL https://deb.nodesource.com/setup_6.x | bash -) \
@@ -16,6 +18,7 @@ RUN apt-get -yy update && apt-get -yy install curl \
     libmagickwand-dev \
     libcurl4-openssl-dev \
     libpq-dev \
+    rsyslog \
 && rm -rf /var/lib/apt/lists/*
 
 # Copy our nginx config to the right place
