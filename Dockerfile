@@ -45,4 +45,4 @@ CMD ['bin/start.sh']
 # Copy Gemfile & Gemfile.lock, then run bundle install, then uninstall build-essential to thin out the image
 ONBUILD COPY Gemfile .
 ONBUILD COPY Gemfile.lock .
-ONBUILD RUN bundle install --with=production --without="development test"
+ONBUILD RUN bundle install --with=production --without="development test" --jobs=3
