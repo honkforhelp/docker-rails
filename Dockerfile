@@ -32,3 +32,16 @@ RUN gem install bundler
 
 # Set the Working Directory for All Commands that Follow
 WORKDIR /app
+
+# Copy Our Default startup script
+COPY start.sh bin/
+
+# Set our Default Action
+CMD ['bin/start.sh']
+
+# ONBUILD section:
+# Copy Gemfile & Gemfile.lock, then run bundle install, then uninstall build-essential to thin out the image
+ONBUILD COPY Gemfile .
+ONBUILD COPY Gemfile.lock .
+ONBUILD RUN bundle install --with=production --without="development test"
+ONBUILD RUN apt-get -yy uninstall build-essential
