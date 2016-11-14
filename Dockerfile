@@ -27,8 +27,10 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Port corresponding to the port we send traffic to in our nginx.conf
 ENV PORT=5000
 
-# Pre-Install the Latest Bundler
-RUN gem install bundler
+# Pre-Install the Latest Bundler and Rails 4.2.X for a quicker bundle install later
+# -N disables document generation
+RUN gem install bundler -v "~> 1.13" -N
+RUN gem install rails -v "~> 4.2" -N
 
 # Set the Working Directory for All Commands that Follow
 WORKDIR /app
