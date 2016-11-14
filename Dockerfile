@@ -46,4 +46,3 @@ CMD ['bin/start.sh']
 ONBUILD COPY Gemfile .
 ONBUILD COPY Gemfile.lock .
 ONBUILD RUN bundle install --with=production --without="development test"
-ONBUILD RUN apt-get -y remove build-essential && apt autoremove
