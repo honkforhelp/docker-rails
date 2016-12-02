@@ -1,25 +1,7 @@
 # Use the Latest LTS Ubuntu Version
-FROM ubuntu:16.04
+FROM honkdev/common:1.0.0
 
 MAINTAINER HONK Technologies, Inc.
-
-# Curl Nonsense to get NodeJS 6.X (LTS) Version
-RUN apt-get -yy update && apt-get -yy install curl \
-&& (curl -sL https://deb.nodesource.com/setup_6.x | bash -) \
-&& apt-get -yy install \
-    build-essential \
-    git \
-    ruby-dev \
-    zlib1g-dev \
-    liblzma-dev \
-    nginx \
-    nodejs \
-    file \
-    libmagickwand-dev \
-    libcurl4-openssl-dev \
-    libpq-dev \
-    rsyslog \
-&& rm -rf /var/lib/apt/lists/*
 
 # Copy our nginx config to the right place
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -39,10 +21,10 @@ WORKDIR /app
 COPY start.sh bin/
 
 # Set our Default Action
-CMD ['bin/start.sh']
+CMD ['./bin/start.sh']
 
 # ONBUILD section:
 # Copy Gemfile & Gemfile.lock, then run bundle install, then uninstall build-essential to thin out the image
 ONBUILD COPY Gemfile .
 ONBUILD COPY Gemfile.lock .
-ONBUILD RUN bundle install --with=production --without="development test" --jobs=3
+ONBUILD RUN bundle install --with="production" --without="development test" -j4
