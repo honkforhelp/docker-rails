@@ -23,7 +23,7 @@ WORKDIR /app
 COPY start.sh bin/
 
 # Set our Default Action
-CMD ['./bin/start.sh']
+CMD ["./bin/start.sh"]
 
 # ONBUILD section:
 # Copy Gemfile & Gemfile.lock, then run bundle install, then uninstall build-essential to thin out the image
